@@ -32,7 +32,7 @@ const AppointmentDetailPage = ({ appointmentId, onBack }) => {
       setError(null);
 
       const appointmentsResponse = await fetch(
-            ${API_BASE_URL}/api/v1/doctor/appointments?limit=1000``,
+            `${API_BASE_URL}/api/v1/doctor/appointments?limit=1000`,
         {
           headers: {
             'Authorization': `Bearer ${token}`,
