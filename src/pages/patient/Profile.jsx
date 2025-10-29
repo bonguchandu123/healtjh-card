@@ -8,6 +8,7 @@ const PatientProfilePage = () => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   
   const [formData, setFormData] = useState({
     full_name: '',
@@ -30,7 +31,7 @@ const PatientProfilePage = () => {
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/v1/patient/profile', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/profile`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -63,7 +64,7 @@ const PatientProfilePage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/v1/patient/profile', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/profile`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

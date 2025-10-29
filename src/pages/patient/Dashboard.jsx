@@ -17,6 +17,7 @@ const DashboardPage = () => {
   const [latestVitals, setLatestVitals] = useState(null);
   const [upcomingMedications, setUpcomingMedications] = useState([]);
   const [healthTrends, setHealthTrends] = useState(null);
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchDashboardData();

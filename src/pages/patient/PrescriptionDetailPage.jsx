@@ -36,6 +36,7 @@ const PrescriptionDetailPage = () => {
   const [chatMessage, setChatMessage] = useState('');
   const [sendingChat, setSendingChat] = useState(false);
   const [loadingChat, setLoadingChat] = useState(false);
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   
   // Delete Modal
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -68,7 +69,7 @@ const PrescriptionDetailPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/v1/patient/prescriptions/${id}`, {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/prescriptions/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -88,7 +89,7 @@ const PrescriptionDetailPage = () => {
       setError('');
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/v1/patient/prescriptions/${id}/extract`,
+        `${VITE_API_BASE_URL}/api/v1/patient/prescriptions/${id}/extract`,
         {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${token}` }
@@ -111,7 +112,7 @@ const PrescriptionDetailPage = () => {
       setError('');
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/v1/patient/prescriptions/${id}/summarize`,
+        `${VITE_API_BASE_URL}/api/v1/patient/prescriptions/${id}/summarize`,
         {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${token}` }
@@ -133,7 +134,7 @@ const PrescriptionDetailPage = () => {
       setLoadingChat(true);
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/v1/patient/prescriptions/${id}/chat-history`,
+       `${VITE_API_BASE_URL}/api/v1/patient/prescriptions/${id}/chat-history`,
         {
           headers: { 'Authorization': `Bearer ${token}` }
         }
@@ -156,7 +157,7 @@ const PrescriptionDetailPage = () => {
       setSendingChat(true);
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/v1/patient/prescriptions/${id}/chat`,
+     `${VITE_API_BASE_URL}/api/v1/patient/prescriptions/${id}/chat`,
         {
           method: 'POST',
           headers: {
@@ -182,7 +183,7 @@ const PrescriptionDetailPage = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/v1/prescriptions/${id}/download`,
+      `${VITE_API_BASE_URL}/api/v1/prescriptions/${id}/download`,
         { headers: { 'Authorization': `Bearer ${token}` } }
       );
 
@@ -199,7 +200,7 @@ const PrescriptionDetailPage = () => {
       setDeleting(true);
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/v1/patient/prescriptions/${id}`,
+      `${VITE_API_BASE_URL}/api/v1/patient/prescriptions/${id}`,
         {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }

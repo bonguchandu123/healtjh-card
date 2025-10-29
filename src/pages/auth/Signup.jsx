@@ -6,6 +6,7 @@ import axios from 'axios';
 const SignupPage = () => {
   const navigate = useNavigate();
   const { signup, isAuthenticated, user, api } = useAuth();
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedRole, setSelectedRole] = useState('');
@@ -62,7 +63,7 @@ const SignupPage = () => {
   const fetchHospitals = async () => {
     try {
       // Fetch all hospitals for doctor signup
-      const response = await axios.get('http://localhost:8000/api/v1/public/hospitals');
+      const response = await axios.get(`${API_BASE_URL}/api/v1/public/hospitals`);
       setHospitals(response.data || []);
     } catch (error) {
       console.error('Error fetching hospitals:', error);

@@ -27,6 +27,8 @@ const ChatPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [ws, setWs] = useState(null);
   const messagesEndRef = useRef(null);
+  const VITE_WEBSOCKET_URL = import.meta.env.VITE_WEBSOCKET_URL || 'ws://localhost:8000';
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchAvailableUsers();
@@ -53,7 +55,7 @@ const ChatPage = () => {
   const connectWebSocket = () => {
     if (!user?.id) return;
 
-    const websocket = new WebSocket(`ws://localhost:8000/ws/${user.id}`);
+    const websocket = new WebSocket(`${VITE_WEBSOCKET_URL}/ws/${user.id}`);
 
     websocket.onopen = () => {
       console.log('WebSocket connected');
@@ -97,7 +99,7 @@ const ChatPage = () => {
 
   const fetchAvailableUsers = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/chat/available-users', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/chat/available-users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -112,7 +114,7 @@ const ChatPage = () => {
 
   const fetchConversations = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/chat/conversations', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/chat/conversations`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -129,7 +131,7 @@ const ChatPage = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/chat/${userId}/messages`,
+        `${VITE_API_BASE_URL}/api/v1/chat/${userId}/messages`,
         {
           headers: { 'Authorization': `Bearer ${token}` }
         }
@@ -149,7 +151,7 @@ const ChatPage = () => {
   const markMessageAsRead = async (messageId) => {
     try {
       await fetch(
-        `http://localhost:8000/api/v1/chat/messages/${messageId}/read`,
+        `${VITE_API_BASE_URL}/api/v1/chat/messages/${messageId}/read`,
         {
           method: 'PUT',
           headers: { 'Authorization': `Bearer ${token}` }
@@ -169,7 +171,7 @@ const ChatPage = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/chat/send', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/chat/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

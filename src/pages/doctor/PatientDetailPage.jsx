@@ -12,6 +12,7 @@ const PatientDetailPage = ({ patientId, onBack }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
+   const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     if (patientId) {
@@ -25,7 +26,7 @@ const PatientDetailPage = ({ patientId, onBack }) => {
       setError(null);
 
       const response = await fetch(
-        `http://localhost:8000/api/v1/doctor/patient/${patientId}/details`,
+        `${VITE_API_BASE_URL}/api/v1/doctor/patient/${patientId}/details`,
         {
           headers: {
             'Authorization': `Bearer ${token}`,

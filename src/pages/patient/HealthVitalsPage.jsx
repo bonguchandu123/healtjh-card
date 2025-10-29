@@ -35,7 +35,7 @@ const HealthVitalsPage = () => {
     sleep_hours: '',
     notes: ''
   });
-
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   const [filters, setFilters] = useState({
     days: 30
   });
@@ -48,7 +48,7 @@ const HealthVitalsPage = () => {
 
   const fetchLatestVital = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/vitals/latest', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/vitals/latest`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -67,7 +67,7 @@ const HealthVitalsPage = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/vitals?days=${filters.days}`,
+        `${VITE_API_BASE_URL}/api/v1/vitals?days=${filters.days}`,
         {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -89,7 +89,7 @@ const HealthVitalsPage = () => {
   const fetchHealthTrends = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/analytics/patient-health-trends?days=${filters.days}`,
+        `${VITE_API_BASE_URL}/api/v1/analytics/patient-health-trends?days=${filters.days}`,
         {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -118,7 +118,7 @@ const HealthVitalsPage = () => {
     });
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/vitals', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/vitals`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

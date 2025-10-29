@@ -10,6 +10,8 @@ const QRCodePage = () => {
   const [qrData, setQrData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState('');
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+  const VITE_FRONTEND_BASE_URL = import.meta.env.VITE_FRONTEND_BASE_URL || 'http://localhost:3000';
 
   useEffect(() => {
     generateQRCode();
@@ -18,7 +20,7 @@ const QRCodePage = () => {
   const generateQRCode = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/v1/patient/qr-code', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/qr-code`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       

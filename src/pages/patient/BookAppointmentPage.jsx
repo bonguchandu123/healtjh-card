@@ -41,6 +41,7 @@ const BookAppointmentPage = () => {
     allergies: '',
     insurance_info: ''
   });
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   const [currentStep, setCurrentStep] = useState(0);
   const [errors, setErrors] = useState({});
@@ -74,7 +75,7 @@ const BookAppointmentPage = () => {
       
       console.log('Fetching hospitals from: http://localhost:8000/api/v1/public/hospitals');
       
-      const response = await fetch('http://localhost:8000/api/v1/public/hospitals', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/public/hospitals`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -184,7 +185,7 @@ const handleSubmit = async () => {
     
     console.log('✅ Submitting appointment with hospital_id:', appointmentData);
     
-    const response = await fetch('http://localhost:8000/api/v1/patient/appointments', {
+    const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/appointments`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,

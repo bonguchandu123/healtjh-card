@@ -16,6 +16,7 @@ const PatientsPage = () => {
   const [patientDetails, setPatientDetails] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loadingDetails, setLoadingDetails] = useState(false);
+   const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchPatients();
@@ -31,7 +32,7 @@ const PatientsPage = () => {
     setError(null);
 
     // Fetch all appointments to extract unique patients (max limit is 100)
-    const response = await fetch('http://localhost:8000/api/v1/doctor/appointments?limit=100', {
+    const response = await fetch(`${VITE_API_BASE_URL}/api/v1/doctor/appointments?limit=100`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ const PatientsPage = () => {
       setLoadingDetails(true);
 
       const response = await fetch(
-        `http://localhost:8000/api/v1/doctor/patient/${patientId}/details`,
+        `${VITE_API_BASE_URL}/api/v1/doctor/patient/${patientId}/details`,
         {
           headers: {
             'Authorization': `Bearer ${token}`,

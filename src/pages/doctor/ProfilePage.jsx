@@ -19,6 +19,7 @@ const ProfilePage = () => {
     availability: []
   });
 
+   const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const ProfilePage = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('http://localhost:8000/api/v1/doctor/profile', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/doctor/profile`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -83,7 +84,7 @@ const ProfilePage = () => {
       setError(null);
       setSuccess(null);
 
-      const response = await fetch('http://localhost:8000/api/v1/doctor/profile', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/doctor/profile`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

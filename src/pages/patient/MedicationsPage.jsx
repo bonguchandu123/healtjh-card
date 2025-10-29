@@ -35,6 +35,7 @@ const MedicationsPage = () => {
     duration_days: 30,
     instructions: ''
   });
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchReminders();
@@ -46,7 +47,7 @@ const MedicationsPage = () => {
   const fetchReminders = async () => {
     try {
       const response = await fetch(
-        'http://localhost:8000/api/v1/medications/reminders?active_only=true',
+        `${VITE_API_BASE_URL}/api/v1/medications/reminders?active_only=true`,
         { headers: { 'Authorization': `Bearer ${token}` }}
       );
       if (response.ok) {
@@ -61,7 +62,7 @@ const MedicationsPage = () => {
   const fetchTodaySchedule = async () => {
     try {
       const response = await fetch(
-        'http://localhost:8000/api/v1/medications/today',
+        `${VITE_API_BASE_URL}/api/v1/medications/today`,
         { headers: { 'Authorization': `Bearer ${token}` }}
       );
       if (response.ok) {
@@ -76,7 +77,7 @@ const MedicationsPage = () => {
   const fetchAdherenceStats = async () => {
     try {
       const response = await fetch(
-        'http://localhost:8000/api/v1/medications/adherence?days=30',
+        `${VITE_API_BASE_URL}/api/v1/medications/adherence?days=30`,
         { headers: { 'Authorization': `Bearer ${token}` }}
       );
       if (response.ok) {
@@ -91,7 +92,7 @@ const MedicationsPage = () => {
   const fetchMedicationLogs = async () => {
     try {
       const response = await fetch(
-        'http://localhost:8000/api/v1/medications/logs?days=7',
+        `${VITE_API_BASE_URL}/api/v1/medications/logs?days=7`,
         { headers: { 'Authorization': `Bearer ${token}` }}
       );
       if (response.ok) {
@@ -109,8 +110,8 @@ const MedicationsPage = () => {
 
     try {
       const url = editingReminder
-        ? `http://localhost:8000/api/v1/medications/reminders/${editingReminder.id}`
-        : 'http://localhost:8000/api/v1/medications/reminders';
+        ? `${VITE_API_BASE_URL}/api/v1/medications/reminders/${editingReminder.id}`
+        : `${VITE_API_BASE_URL}/api/v1/medications/reminders`;
       
       const method = editingReminder ? 'PUT' : 'POST';
 
@@ -156,7 +157,7 @@ const MedicationsPage = () => {
   const handleMarkTaken = async (reminderId) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/medications/reminders/${reminderId}/taken`,
+        `${VITE_API_BASE_URL}/api/v1/medications/reminders/${reminderId}/taken`,
         {
           method: 'POST',
           headers: {
@@ -181,7 +182,7 @@ const MedicationsPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/medications/reminders/${reminderId}`,
+        `${VITE_API_BASE_URL}/api/v1/medications/reminders/${reminderId}`,
         {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }

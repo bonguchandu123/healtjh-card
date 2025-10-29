@@ -18,6 +18,7 @@ const AppointmentDetailPage = ({ appointmentId, onBack }) => {
   const [notes, setNotes] = useState('');
   const [showNotesModal, setShowNotesModal] = useState(false);
   const [actionType, setActionType] = useState('');
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     if (appointmentId) {
@@ -31,7 +32,7 @@ const AppointmentDetailPage = ({ appointmentId, onBack }) => {
       setError(null);
 
       const appointmentsResponse = await fetch(
-        'http://localhost:8000/api/v1/doctor/appointments?limit=1000',
+            ${API_BASE_URL}/api/v1/doctor/appointments?limit=1000``,
         {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -53,7 +54,7 @@ const AppointmentDetailPage = ({ appointmentId, onBack }) => {
 
       if (foundAppointment.patient_id) {
         const patientResponse = await fetch(
-          `http://localhost:8000/api/v1/doctor/patient/${foundAppointment.patient_id}/details`,
+          `${API_BASE_URL}/api/v1/doctor/patient/${foundAppointment.patient_id}/details`,
           {
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -81,7 +82,7 @@ const AppointmentDetailPage = ({ appointmentId, onBack }) => {
       setUpdating(true);
       setError(null);
 
-      const url = `http://localhost:8000/api/v1/doctor/appointments/${appointmentId}/status?new_status=${newStatus}${doctorNotes ? `&notes=${encodeURIComponent(doctorNotes)}` : ''}`;
+      const url = `${API_BASE_URL}/api/v1/doctor/appointments/${appointmentId}/status?new_status=${newStatus}${doctorNotes ? `&notes=${encodeURIComponent(doctorNotes)}` : ''}`;
 
       const response = await fetch(url, {
         method: 'PUT',
