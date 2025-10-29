@@ -11,6 +11,7 @@ const PublicScanPage = () => {
   const [healthData, setHealthData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     if (patientId) {
@@ -25,7 +26,7 @@ const PublicScanPage = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/public/patient/${patientId}/health-card`
+        `${VITE_API_BASE_URL}/api/v1/public/patient/${patientId}/health-card`
       );
       
       if (response.ok) {

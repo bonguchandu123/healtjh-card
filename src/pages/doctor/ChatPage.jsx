@@ -17,6 +17,8 @@ const DChatPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const messagesEndRef = useRef(null);
   const ws = useRef(null);
+  const API_BASE_URL = import.meta.env.VITE_WEBSOCKET_URL || 'ws://localhost:8000';
+  const HTTP_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchAvailableUsers();
@@ -43,7 +45,7 @@ const DChatPage = () => {
   const connectWebSocket = () => {
     if (!user?.id) return;
 
-    const wsUrl = `ws://localhost:8000/ws/${user.id}`;
+    const wsUrl = `${API_BASE_URL}/ws/${user.id}`;
     ws.current = new WebSocket(wsUrl);
 
     ws.current.onopen = () => {
@@ -74,7 +76,7 @@ const DChatPage = () => {
 
   const fetchAvailableUsers = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/chat/available-users', {
+      const response = await fetch(`${HTTP_API_BASE_URL}/api/v1/chat/available-users`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -92,7 +94,7 @@ const DChatPage = () => {
 
   const fetchConversations = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/chat/conversations', {
+      const response = await fetch(`${HTTP_API_BASE_URL}/api/v1/chat/conversations`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -113,7 +115,7 @@ const DChatPage = () => {
   const fetchMessages = async (userId) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/chat/${userId}/messages?limit=100`,
+        `${HTTP_API_BASE_URL}/api/v1/chat/${userId}/messages?limit=100`,
         {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -139,7 +141,7 @@ const DChatPage = () => {
     try {
       setSending(true);
 
-      const response = await fetch('http://localhost:8000/api/v1/chat/send', {
+      const response = await fetch(`${HTTP_API_BASE_URL}/api/v1/chat/send`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

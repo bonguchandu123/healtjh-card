@@ -24,6 +24,7 @@ const PrescriptionsPage = () => {
   const [filterStatus, setFilterStatus] = useState('all'); // all, processed, unprocessed
   const [deleteModal, setDeleteModal] = useState({ show: false, id: null });
   const [deleting, setDeleting] = useState(false);
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchPrescriptions();
@@ -33,7 +34,7 @@ const PrescriptionsPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/v1/patient/prescriptions?limit=100', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/prescriptions?limit=100`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -54,7 +55,7 @@ const PrescriptionsPage = () => {
     setDeleting(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/v1/patient/prescriptions/${id}`, {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/prescriptions/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -76,7 +77,7 @@ const PrescriptionsPage = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:8000/api/v1/prescriptions/${prescription.id}/download`,
+       `${VITE_API_BASE_URL}/api/v1/prescriptions/${prescription.id}/download`,
         {
           headers: {
             'Authorization': `Bearer ${token}`

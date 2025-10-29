@@ -13,6 +13,7 @@ const DAppointmentsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showModal, setShowModal] = useState(false);
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchAppointments();
@@ -27,7 +28,7 @@ const DAppointmentsPage = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('http://localhost:8000/api/v1/doctor/appointments?limit=100', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/doctor/appointments?limit=100`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -76,7 +77,7 @@ const DAppointmentsPage = () => {
   const updateAppointmentStatus = async (appointmentId, newStatus, notes = '') => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/doctor/appointments/${appointmentId}/status?new_status=${newStatus}${notes ? `&notes=${encodeURIComponent(notes)}` : ''}`,
+        `${API_BASE_URL}/api/v1/doctor/appointments/${appointmentId}/status?new_status=${newStatus}${notes ? `&notes=${encodeURIComponent(notes)}` : ''}`,
         {
           method: 'PUT',
           headers: {

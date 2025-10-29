@@ -26,7 +26,7 @@ const UploadPrescriptionPage = () => {
     date_prescribed: '',
     notes: ''
   });
-  
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -119,7 +119,7 @@ const UploadPrescriptionPage = () => {
         formDataToSend.append('notes', formData.notes);
       }
 
-      const response = await fetch('http://localhost:8000/api/v1/patient/prescriptions/upload', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/prescriptions/upload`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

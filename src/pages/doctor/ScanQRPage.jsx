@@ -15,6 +15,7 @@ const ScanQRPage = () => {
   const [success, setSuccess] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
   const [scanning, setScanning] = useState(false);
+   const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -188,7 +189,7 @@ const ScanQRPage = () => {
       setScannedData(null);
 
       const response = await fetch(
-        `http://localhost:8000/api/v1/doctor/scan-qr?patient_id=${idToUse}`,
+        `${VITE_API_BASE_URL}/api/v1/doctor/scan-qr?patient_id=${idToUse}`,
         {
           method: 'POST',
           headers: {

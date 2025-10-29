@@ -34,6 +34,7 @@ const AppointmentsPage = () => {
   const [cancelModal, setCancelModal] = useState({ show: false, id: null });
   const [cancelReason, setCancelReason] = useState('');
   const [cancelling, setCancelling] = useState(false);
+    const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchAppointments();
@@ -51,7 +52,7 @@ const AppointmentsPage = () => {
         return;
       }
 
-      let url = 'http://localhost:8000/api/v1/patient/appointments?limit=100';
+      let url = `${VITE_API_BASE_URL}/api/v1/patient/appointments?limit=100`;
       if (statusFilter !== 'all') {
         url += `&status_filter=${statusFilter}`;
       }
@@ -89,7 +90,7 @@ const AppointmentsPage = () => {
       const token = localStorage.getItem('token') || 'demo-token';
       
       const response = await fetch(
-        `http://localhost:8000/api/v1/patient/appointments/${cancelModal.id}?reason=${encodeURIComponent(cancelReason)}`,
+        `${VITE_API_BASE_URL}/api/v1/patient/appointments/${cancelModal.id}?reason=${encodeURIComponent(cancelReason)}`,
         {
           method: 'DELETE',
           headers: { 

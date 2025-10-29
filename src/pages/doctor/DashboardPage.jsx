@@ -8,6 +8,7 @@ const DDashboardPage = () => {
   const [todayAppointments, setTodayAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchDashboardData();
@@ -19,7 +20,7 @@ const DDashboardPage = () => {
       setError(null);
 
       // Fetch dashboard stats
-      const statsResponse = await fetch('http://localhost:8000/api/v1/doctor/dashboard/stats', {
+      const statsResponse = await fetch(`${VITE_API_BASE_URL}/api/v1/doctor/dashboard/stats`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -33,7 +34,7 @@ const DDashboardPage = () => {
       // Fetch today's appointments
       const today = new Date().toISOString().split('T')[0];
       const appointmentsResponse = await fetch(
-        `http://localhost:8000/api/v1/doctor/appointments?date_filter=${today}&limit=10`,
+        `${VITE_API_BASE_URL}/api/v1/doctor/appointments?date_filter=${today}&limit=10`,
         {
           headers: {
             'Authorization': `Bearer ${token}`,

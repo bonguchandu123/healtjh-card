@@ -33,7 +33,7 @@ const HospitalsPage = () => {
     longitude: null,
     city: ''
   });
-  
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   const [radius, setRadius] = useState(10); // Default 10km
   const [gettingLocation, setGettingLocation] = useState(false);
 
@@ -70,7 +70,7 @@ const HospitalsPage = () => {
       setError('');
       
    
-      const response = await fetch('http://localhost:8000/api/v1/patient/hospitals/nearby', {
+      const response = await fetch(`${VITE_API_BASE_URL}/api/v1/patient/hospitals/nearby`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
