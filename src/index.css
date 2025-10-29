@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* 
+digital-health-card-frontend/
+│
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+│
+├── src/
+│   ├── App.jsx
+│   ├── main.jsx
+│   ├── index.css
+│   │
+│   ├── context/
+│   │   └── AuthContext.jsx             # Authentication context only
+│   │
+│   ├── components/
+│   │   └── Sidebar.jsx                 # Sidebar navigation only
+│   │
+│   └── pages/
+│       │
+│       ├── auth/
+│       │   ├── LoginPage.jsx           # Login page
+│       │   └── SignupPage.jsx          # Signup page
+│       │
+│       ├── patient/
+│       │   ├── DashboardPage.jsx       # Patient dashboard
+│       │   ├── ProfilePage.jsx         # Patient profile
+│       │   ├── PrescriptionsPage.jsx   # All prescriptions
+│       │   ├── PrescriptionDetailPage.jsx  # Single prescription view
+│       │   ├── UploadPrescriptionPage.jsx  # Upload new prescription
+│       │   ├── AppointmentsPage.jsx    # All appointments
+│       │   ├── BookAppointmentPage.jsx # Book new appointment
+│       │   ├── HospitalsPage.jsx       # Find nearby hospitals
+│       │   ├── HealthVitalsPage.jsx    # Record and view vitals
+│       │   ├── MedicationsPage.jsx     # Medication reminders
+│       │   ├── ChatPage.jsx            # Chat with doctors/admin
+│       │   └── QRCodePage.jsx          # Patient QR code
+│       │
+│       ├── doctor/
+│       │   ├── DashboardPage.jsx       # Doctor dashboard
+│       │   ├── ProfilePage.jsx         # Doctor profile
+│       │   ├── AppointmentsPage.jsx    # Doctor's appointments
+│       │   ├── AppointmentDetailPage.jsx   # Appointment details
+│       │   ├── PatientsPage.jsx        # Doctor's patients
+│       │   ├── PatientDetailPage.jsx   # Patient health details
+│       │   ├── ScanQRPage.jsx          # Scan patient QR code
+│       │   └── ChatPage.jsx            # Chat with patients
+│       │
+│       └── admin/
+│           ├── DashboardPage.jsx       # Admin dashboard
+│           ├── ProfilePage.jsx         # Admin profile
+│           ├── HospitalsPage.jsx       # Manage hospitals
+│           ├── CreateHospitalPage.jsx  # Create new hospital
+│           ├── AppointmentsPage.jsx    # Manage appointments
+│           ├── AppointmentDetailPage.jsx   # Appointment management
+│           ├── DoctorsPage.jsx         # Hospital doctors
+│           ├── AnalyticsPage.jsx       # Analytics and reports
+│           └── ChatPage.jsx            # Chat with patients/doctors
+│
+├── .env
+├── .gitignore
+├── package.json
+├── vite.config.js
+├── postcss.config.js
+├── tailwind.config.js */
